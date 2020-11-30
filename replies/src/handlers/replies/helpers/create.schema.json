@@ -1,0 +1,17 @@
+{
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "intent",
+      "message"
+    ],
+    "properties": {
+      "intent": {
+        "type": "string"
+      },
+      "message":{
+        "type": "string"
+      }
+    }
+  }
+  

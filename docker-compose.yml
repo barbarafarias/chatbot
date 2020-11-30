@@ -1,0 +1,27 @@
+version: '2'
+services:
+    messages:
+        build: ./messages
+        container_name: "messages"
+        environment:
+            - NODE_ENV=development
+        ports:
+            - 3000:3000
+        depends_on:
+            - replies
+    replies:
+        build: ./replies
+        container_name: "replies"
+        env_file: .env
+        environment:
+            MONGODB_URI: mongodb://localhost:27017/replies
+        ports:
+            - 3001:3001
+        links:
+            - mongodb
+        depends_on:
+            - mongodb
+    mongodb:
+        image: "mongo:latest"
+        ports:
+        - "27017:27017"

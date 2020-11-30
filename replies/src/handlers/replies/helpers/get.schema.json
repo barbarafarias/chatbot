@@ -1,0 +1,13 @@
+{
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "intent"
+    ],
+    "properties": {
+      "intent": {
+        "type": "string"
+      }
+    }
+  }
+  

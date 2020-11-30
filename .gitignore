@@ -1,5 +1,9 @@
 # Dependency directories
 node_modules/
+messages/node_modules/
+replies/node_modules/
 
 # dotenv environment variables file
 .env
+messages/.env
+replies/.env

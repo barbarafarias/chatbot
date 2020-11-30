@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 const path = require('path');
 const swaggerJSDoc = require('swagger-jsdoc');
+const config = require('../config');
 const swaggerDefinition = require('./swagger-def');
 
 // Options for the swagger docs
@@ -24,4 +25,9 @@ exports.register = (server) => {
 
   // health check
   server.get('/health', require('./handlers/health'));
+
+  // replies
+  server.get(`/${config.api.base}/${config.api.version}/replies`, require('./handlers/replies/get'));
+  server.post(`/${config.api.base}/${config.api.version}/replies`, require('./handlers/replies/post'));
+  server.delete(`/${config.api.base}/${config.api.version}/replies/:id`, require('./handlers/replies/delete'));
 };

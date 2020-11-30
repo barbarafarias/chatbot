@@ -1,0 +1,48 @@
+{
+  "name": "messages",
+  "version": "1.0.0",
+  "description": "Chatbot Messages API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "test": "jest",
+    "lint": "eslint -c .eslintrc.js .",
+    "lint:fix": "eslint --fix -c .eslintrc.js ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barbarafarias/chatbot.git"
+  },
+  "keywords": [
+    "chatbot",
+    "ai"
+  ],
+  "author": "Bárbara Farias Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/barbarafarias/chatbot/issues"
+  },
+  "homepage": "https://github.com/barbarafarias/chatbot#readme",
+  "dependencies": {
+    "ajv": "^6.12.6",
+    "axios": "^0.21.0",
+    "axios-mock-adapter": "^1.19.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "swagger-jsdoc": "^6.0.0-rc.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6"
+  },
+  "jest": {
+    "globalSetup":  "./src/test/config/setup-globals.js",
+    "globalTeardown":  "./src/test/config/teardown-globals.js"
+  }
+}
