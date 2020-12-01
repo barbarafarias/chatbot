@@ -79,7 +79,7 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    if (!response.data || (response.data && response.data.length < 1)) {
+    if (response.data.intents.length < 1) {
       // no intent found, return default message
       return res.status(200).json({
         status: 200,
