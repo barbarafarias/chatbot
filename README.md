@@ -8,9 +8,17 @@ On Replies API the user can also create, delete and query for reply messages.
 
 ## How to run
 
+### Setup
+
+```console
+git clone git@github.com:barbarafarias/chatbot.git
+cd chatbot
+```
+
 ### Development mode
 
 ```console
+yarn install:all
 yarn start:mongodb
 yarn dev:replies
 yarn dev:messages
@@ -19,6 +27,7 @@ yarn dev:messages
 ### Production mode
 
 ```console
+yarn install:all
 yarn start:mongodb
 yarn start:replies
 yarn start:messages
