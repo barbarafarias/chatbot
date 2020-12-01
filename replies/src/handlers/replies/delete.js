@@ -30,7 +30,7 @@ const { Message } = require('../../models/message');
 module.exports = async (req, res, next) => {
   try {
     // delete from mongodb
-    await Message.findById({ _id: req.params.id });
+    await Message.findByIdAndDelete({ _id: req.params.id });
 
     return res.status(200).json({
       status: 200,

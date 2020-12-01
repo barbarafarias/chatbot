@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,6 +6,8 @@ const logger = require('loglevel');
 const routes = require('./src/routes');
 const config = require('./config');
 const mongoose = require('./mongoose');
+
+const isTest = process.env.NODE_ENV === 'test';
 
 function startServer({ port = config.port } = {}) {
   const app = express();
@@ -24,7 +25,7 @@ function startServer({ port = config.port } = {}) {
   routes.register(app);
 
   // trying to connect to mongodb
-  mongoose.connect();
+  if (!isTest) { mongoose.connect(); }
 
   // start server
   return new Promise((resolve) => {
