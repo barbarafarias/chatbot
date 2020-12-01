@@ -1,4 +1,5 @@
-const { Reply } = require('../../models/reply');
+const logger = require('loglevel');
+const { Message } = require('../../models/message');
 
 /**
  * @swagger
@@ -38,7 +39,7 @@ module.exports = async (req, res, next) => {
   const { intent } = req.query;
 
   try {
-    const replies = await Reply.find({ intent });
+    const replies = await Message.find({ intent });
 
     return res.status(200).json({
       status: 200,
@@ -46,6 +47,7 @@ module.exports = async (req, res, next) => {
       replies,
     });
   } catch (err) {
+    logger.error(err);
     return res.status(500).json({
       status: 500,
       message: 'An internal error occurred.',

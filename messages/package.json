@@ -32,6 +32,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "loglevel": "^1.7.1",
     "swagger-jsdoc": "^6.0.0-rc.3"
   },
   "devDependencies": {
@@ -42,7 +43,7 @@
     "nodemon": "^2.0.6"
   },
   "jest": {
-    "globalSetup":  "./src/test/config/setup-globals.js",
-    "globalTeardown":  "./src/test/config/teardown-globals.js"
+    "globalSetup": "./src/test/config/setup-globals.js",
+    "globalTeardown": "./src/test/config/teardown-globals.js"
   }
 }

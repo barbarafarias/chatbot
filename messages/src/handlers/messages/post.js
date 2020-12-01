@@ -2,6 +2,7 @@ const Ajv = require('ajv');
 const axios = require('axios');
 
 const ajv = new Ajv({ useDefaults: true });
+const logger = require('loglevel');
 const validate = ajv.compile(require('./helpers/schema.json'));
 const config = require('../../../config');
 
@@ -109,6 +110,7 @@ module.exports = async (req, res, next) => {
       replies: repliesResponse.data.replies,
     });
   } catch (err) {
+    logger.error(err);
     return res.status(500).json({
       status: 500,
       message: 'An internal error occurred.',

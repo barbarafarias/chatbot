@@ -1,27 +1,43 @@
 version: '2'
+networks:
+  back-tier:
 services:
     messages:
         build: ./messages
         container_name: "messages"
         environment:
-            - NODE_ENV=development
+            NODE_ENV: development
         ports:
             - 3000:3000
-        depends_on:
+        networks:
+            - back-tier
+        links:
             - replies
     replies:
         build: ./replies
+        restart: always
         container_name: "replies"
         env_file: .env
         environment:
-            MONGODB_URI: mongodb://localhost:27017/replies
+            MONGODB_URI: mongodb://chatbot:admin@mongodb:27017/reply
+            NODE_ENV: development
         ports:
             - 3001:3001
+        networks:
+            - back-tier
         links:
             - mongodb
         depends_on:
             - mongodb
     mongodb:
         image: "mongo:latest"
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=password
+            - MONG_INITDB_DATABASE=admin
+        volumes:
+            - ./db/:/docker-entrypoint-initdb.d
         ports:
-        - "27017:27017"
+            - "27017:27017"
+        networks:
+            - back-tier

@@ -1,4 +1,5 @@
-const { Reply } = require('../../models/reply');
+const logger = require('loglevel');
+const { Message } = require('../../models/message');
 
 /**
  * @swagger
@@ -29,13 +30,14 @@ const { Reply } = require('../../models/reply');
 module.exports = async (req, res, next) => {
   try {
     // delete from mongodb
-    await Reply.findById({ _id: req.params.id });
+    await Message.findById({ _id: req.params.id });
 
     return res.status(200).json({
       status: 200,
       message: 'Reply successfully delete.',
     });
   } catch (err) {
+    logger.error(err);
     return res.status(500).json({
       status: 500,
       message: 'An internal error occurred.',

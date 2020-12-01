@@ -3,9 +3,10 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoose = require('mongoose');
+const logger = require('loglevel');
 const routes = require('./src/routes');
 const config = require('./config');
+const mongoose = require('./mongoose');
 
 function startServer({ port = config.port } = {}) {
   const app = express();
@@ -22,23 +23,17 @@ function startServer({ port = config.port } = {}) {
   // setup routes
   routes.register(app);
 
-  console.log(`connecting mongodb on: ${config.db.connection}`);
-  mongoose.connect(config.db.connection, { useNewUrlParser: true }).then(
-    () => console.log('Mongodb connected.'),
-  ).catch(
-    (err) => {
-      console.log(`Error while connecting mongodb: ${err}`);
-    },
-  );
+  // trying to connect to mongodb
+  mongoose.connect();
 
   // start server
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
-      console.log(`Server is up and listening on port ${server.address().port}`);
+      logger.info(`Server is up and listening on port ${server.address().port}`);
 
       const originalClose = server.close.bind(server);
       server.close = () => new Promise((resolveClose) => {
-        console.log('Server is being closed');
+        logger.info('Server is being closed');
         originalClose(resolveClose);
       });
 

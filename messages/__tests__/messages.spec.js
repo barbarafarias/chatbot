@@ -49,8 +49,6 @@ test('validate correct body', async () => {
     conversationId: '1234567890',
   });
 
-  console.log(response);
-
   expect(response.status).toEqual(200);
   expect(response.data.intents).toEqual(expectData.intents);
 

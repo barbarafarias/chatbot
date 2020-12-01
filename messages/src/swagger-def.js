@@ -4,9 +4,9 @@ const config = require('../config');
 // Swagger definition
 module.exports = {
   info: {
-    title: 'Chat Bot',
+    title: 'Chatbot Messages API',
     version,
-    description: 'Chat Bot using ultimate.ai API',
+    description: 'Chatbot Messages API',
   },
   host: `${config.host}:${config.port}`,
 };

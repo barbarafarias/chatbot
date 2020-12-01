@@ -1,9 +1,11 @@
 const Ajv = require('ajv');
 
+const logger = require('loglevel');
+
 const ajv = new Ajv({ useDefaults: true });
 const validate = ajv.compile(require('./helpers/create.schema.json'));
 
-const { Reply } = require('../../models/reply');
+const { Message } = require('../../models/message');
 
 /**
  * @swagger
@@ -58,7 +60,7 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    let reply = new Reply({ ...body });
+    let reply = new Message({ ...body });
     reply = await reply.save();
 
     return res.status(200).json({
@@ -67,6 +69,7 @@ module.exports = async (req, res, next) => {
       reply,
     });
   } catch (err) {
+    logger.error(err);
     return res.status(500).json({
       status: 500,
       message: 'An internal error occurred.',
